@@ -1,0 +1,620 @@
+/* ============================================================
+   handbooks — web stylesheet
+   CSUEB visual identity applied to the handbooks and guides in
+   documents/handbooks/. one sheet, linked by every file here, so a
+   style change never touches the curriculum set or the rest of the
+   repo.
+
+   Montserrat does the structural work, Roboto Serif carries the
+   prose, white page, brand red on white and brand gold on the dark
+   sidebar.
+
+   https://www.csueastbay.edu/universitycommunications/brand/fonts-and-colors.html
+   ============================================================ */
+
+:root {
+  /* CSUEB brand primary palette */
+  --paper:        #FFFFFF;
+  --canvas:       #F2F2F0;
+  --ink:          #000000;   /* brand black */
+  --ink-soft:     #55575B;
+  --rule:         #E4E4E6;
+  --accent:       #D50032;   /* brand red, 5.4:1 on white */
+  --gold:         #FDC25A;   /* brand gold, sidebar only: 1.7:1 on white */
+  --accent-tint:  #FCE6EA;
+
+  --serif: "Roboto Serif", Georgia, serif;
+  --mono:  "Montserrat", "Helvetica Neue", Arial, sans-serif;
+
+  --sidebar-w: 300px;
+  --max-w:     1080px;
+  --measure:   780px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 16.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+}
+
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-tint); }
+a:hover { border-bottom-color: var(--accent); }
+
+/* ── sidebar nav (table of contents) ── */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--ink);
+  color: #fff;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+  padding-bottom: 0.85rem;
+}
+.nav-version {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.5rem;
+  margin-bottom: 1.4rem;
+}
+nav a {
+  display: block;
+  font-family: var(--mono);
+  color: rgba(255,255,255,0.74);
+  text-decoration: none;
+  border: none;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  padding: 0.32rem 0;
+  transition: color 0.15s;
+}
+nav a:hover { color: #fff; }
+nav a .nav-num { color: var(--gold); font-weight: 700; letter-spacing: 0.06em; margin-right: 0.5rem; }
+.nav-sub {
+  font-size: 0.77rem !important;
+  color: rgba(255,255,255,0.55) !important;
+  padding: 0.22rem 0 0.22rem 1.5rem !important;
+}
+.nav-sub:hover { color: #fff !important; }
+.nav-sub2 {
+  font-size: 0.73rem !important;
+  color: rgba(255,255,255,0.45) !important;
+  padding: 0.18rem 0 0.18rem 2.7rem !important;
+}
+.nav-sub2:hover { color: #fff !important; }
+.nav-divider {
+  border: none;
+  border-top: 1px solid rgba(253, 194, 90, 0.35);
+  margin: 1.1rem 0 0.6rem;
+}
+
+/* ── main column ── */
+main {
+  margin-left: var(--sidebar-w);
+  width: calc(100% - var(--sidebar-w));
+  max-width: calc(var(--max-w) + var(--sidebar-w));
+  padding: 4rem 4rem 6rem;
+  background: var(--paper);
+  min-height: 100vh;
+}
+.measure { max-width: var(--measure); }
+
+/* ── record header (the routing slip) ── */
+.page-header {
+  border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.75rem;
+}
+.institution {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+.page-header h1 {
+  font-family: var(--mono);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.page-header .subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+.meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.25rem;
+  margin-top: 1.3rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+.meta-item strong { color: var(--ink); font-weight: 700; }
+
+/* ── numbered sections ── */
+main { counter-reset: sec; }
+.hb-section { margin-bottom: 3rem; counter-increment: sec; }
+.hb-section > h2 {
+  font-family: var(--mono);
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.hb-section > h2::before {
+  content: counter(sec, decimal-leading-zero);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+/* front-matter sections carry no number */
+.front { margin-bottom: 2.5rem; }
+.front h2 {
+  font-family: var(--mono);
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* subsection + minor headings, mono lowercase, no title case */
+h3 {
+  font-family: var(--mono);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 1.7rem 0 0.6rem;
+}
+h4 {
+  font-family: var(--mono);
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin: 1.2rem 0 0.5rem;
+}
+h5 {
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  margin: 1.1rem 0 0.4rem;
+}
+
+p { font-family: var(--serif); margin-bottom: 0.85rem; }
+p:last-child { margin-bottom: 0; }
+.lead { color: var(--ink-soft); }
+strong { font-weight: 600; }
+
+/* defined term: oxblood underline + mono gloss */
+.term { border-bottom: 1.5px solid var(--accent); }
+.gloss { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); }
+
+/* ── plain bullet + numbered lists ── */
+ul.b-list, ol.num-steps { list-style: none; margin: 0.7rem 0; }
+ul.b-list > li {
+  position: relative;
+  padding: 0.32rem 0 0.32rem 1.2rem;
+  font-family: var(--serif);
+  line-height: 1.65;
+}
+ul.b-list > li::before {
+  content: "";
+  position: absolute; left: 0; top: 0.72em;
+  width: 5px; height: 5px;
+  background: var(--accent); border-radius: 50%;
+}
+ol.num-steps { counter-reset: step; }
+ol.num-steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.4rem 0 0.4rem 2.3rem;
+  font-family: var(--serif);
+  line-height: 1.65;
+}
+ol.num-steps > li::before {
+  content: counter(step) ".";
+  position: absolute; left: 0; top: 0.4rem;
+  font-family: var(--mono); font-weight: 700;
+  color: var(--accent); font-size: 0.85rem;
+}
+
+/* ── course / requirement lists ── */
+.course-list { list-style: none; margin: 0.7rem 0 1rem; }
+.course-list li {
+  display: flex;
+  gap: 0.85rem;
+  align-items: baseline;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.course-list li:last-child { border-bottom: none; }
+.cl-code {
+  font-family: var(--mono); font-size: 0.82rem; font-weight: 700;
+  color: var(--accent); flex: 0 0 auto; min-width: 5.5rem;
+}
+.cl-title { font-family: var(--serif); flex: 1 1 auto; line-height: 1.45; }
+.cl-desc {
+  display: block;
+  font-family: var(--serif); font-weight: 400;
+  font-size: 0.9rem; color: var(--ink-soft);
+  line-height: 1.5; margin-top: 0.3rem;
+}
+.cl-ge { font-family: var(--serif); font-style: italic; font-size: 0.85rem; color: var(--ink-soft); }
+.cl-units {
+  font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft);
+  flex: 0 0 auto; text-align: right; white-space: nowrap; min-width: 4.5rem;
+}
+.cl-group {
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; color: var(--ink);
+  margin: 1.2rem 0 0.3rem;
+}
+
+/* ── checklist ── */
+.checklist { list-style: none; margin: 0.7rem 0; }
+.checklist li {
+  font-family: var(--serif);
+  padding: 0.4rem 0 0.4rem 1.9rem;
+  position: relative;
+  line-height: 1.55;
+  border-bottom: 1px solid var(--rule);
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+  content: "\2610";
+  position: absolute; left: 0; top: 0.28rem;
+  font-family: var(--mono); color: var(--accent); font-size: 1.05rem;
+}
+
+/* ── contact blocks (facilities, offices) ── */
+.contact {
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  padding: 0.85rem 1.15rem;
+  margin: 0.8rem 0;
+  background: var(--paper);
+}
+.contact h4 {
+  font-family: var(--mono); font-size: 0.92rem; font-weight: 700; color: var(--ink); margin: 0 0 0.4rem;
+}
+.c-line { font-family: var(--mono); font-size: 0.82rem; color: var(--ink-soft); line-height: 1.7; overflow-wrap: anywhere; }
+.c-line strong { color: var(--ink); font-weight: 700; }
+.c-line a { border: none; }
+.c-role { font-family: var(--serif); font-size: 0.9rem; color: var(--ink); margin-top: 0.25rem; }
+
+/* ── note / policy block ── */
+.policy-block {
+  background: var(--accent-tint);
+  border-left: 3px solid var(--accent);
+  padding: 0.95rem 1.2rem;
+  margin: 1rem 0;
+  font-family: var(--serif);
+  line-height: 1.65;
+}
+.policy-block .policy-label {
+  font-family: var(--mono); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.04em; color: var(--accent);
+  display: block; margin-bottom: 0.4rem;
+}
+.policy-block p { margin-bottom: 0.5rem; }
+.policy-block p:last-child { margin-bottom: 0; }
+
+/* visible to-do marker for unresolved links */
+.todo {
+  font-family: var(--mono); font-size: 0.78rem;
+  background: #fff6d6; border: 1px dashed #b8902a; color: #6b5410;
+  padding: 0.05rem 0.4rem;
+}
+
+/* ── tables (house treatment) ── */
+table.hb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  margin: 0.8rem 0 1rem;
+}
+.hb-table th {
+  font-family: var(--mono); font-size: 0.84rem; font-weight: 700; color: var(--ink);
+  text-align: left; padding: 0 0.7rem 0.55rem;
+  border-bottom: 1.5px solid var(--accent);
+}
+.hb-table td {
+  padding: 0.55rem 0.7rem; vertical-align: top;
+  border-bottom: 1px solid var(--rule); line-height: 1.5;
+}
+.hb-table tr:last-child td { border-bottom: none; }
+.hb-table td.col-code, .hb-table th.col-code {
+  font-family: var(--mono); font-size: 0.82rem; color: var(--ink-soft);
+}
+.hb-table td.num, .hb-table th.num { text-align: right; font-family: var(--mono); font-size: 0.85rem; }
+.hb-table tr.row-accent td {
+  font-family: var(--mono); font-weight: 700;
+  color: var(--accent); background: var(--accent-tint);
+}
+
+/* ── figures (jury diagrams) ── */
+.hb-figure {
+  margin: 1.5rem 0;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  padding: 1.4rem 1.4rem 1rem;
+}
+.hb-figure svg { width: 100%; height: auto; display: block; }
+.hb-figure figcaption {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em;
+  color: var(--ink-soft); margin-top: 0.9rem; padding-top: 0.7rem;
+  border-top: 1px solid var(--rule); line-height: 1.6;
+}
+.hb-figure figcaption strong { color: var(--accent); font-weight: 700; }
+
+/* ── jury requirements by area ── */
+/* one label size throughout; color carries the distinction, not size */
+.jarea {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  background: var(--accent-tint);
+  border-left: 3px solid var(--accent);
+  padding: 0.55rem 0.85rem;
+  margin: 2.2rem 0 1.1rem;
+}
+.jlevel {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--ink);
+  margin: 1.5rem 0 0.5rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid var(--rule);
+}
+.jlevel:first-of-type { border-top: none; padding-top: 0; margin-top: 0.6rem; }
+.jtag {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-left: 0.6rem;
+}
+.jlabel {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin: 0.85rem 0 0.2rem;
+}
+
+/* ── capstone: set the recital and the lecture apart ── */
+.capstone-type {
+  margin: 0.6rem 0 1.6rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--rule);
+}
+.capstone-type > h5 { margin-top: 0.2rem; color: var(--accent); }
+
+/* ── body divider between parts ── */
+hr.hb-rule {
+  border: 0;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
+  margin: 2.8rem 0 1.6rem;
+}
+
+/* ── footer ── */
+footer {
+  margin-top: 3.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ── responsive ── */
+@media (max-width: 860px) {
+  nav { display: none; }
+  main { margin-left: 0; width: 100%; max-width: 100%; padding: 2.5rem 1.4rem 4rem; }
+  .course-list li { flex-wrap: wrap; }
+  .cl-units { min-width: 0; }
+}
+
+/* office contact popovers */
+.office {
+  color: var(--accent);
+  border-bottom: 1px dotted var(--accent);
+  cursor: pointer;
+  text-decoration: none;
+}
+.office:hover,
+.office:focus-visible {
+  background: var(--accent-tint);
+}
+.office-pop {
+  position: absolute;
+  z-index: 60;
+  width: 300px;
+  max-width: calc(100vw - 1.5rem);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+  padding: 0.85rem 1rem 0.95rem;
+}
+.office-pop .contact {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.office-pop h4 {
+  font-size: 0.92rem;
+  margin: 0 0 0.35rem;
+}
+
+/* ------------------------------------------------------------------
+   folded panels (details/summary): collapsible guideline sections.
+   Courier Prime summary in the oxblood accent, serif body, flat chrome.
+   ------------------------------------------------------------------ */
+details.fold {
+  border: 1px solid var(--rule);
+  margin: 0.5rem 0;
+  background: var(--paper);
+}
+details.fold > summary {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary::before {
+  content: "+";
+  width: 1ch;
+  color: var(--accent);
+  font-weight: 700;
+}
+details.fold[open] > summary::before { content: "\2212"; }
+details.fold[open] > summary { border-bottom: 1px solid var(--rule); }
+details.fold .fold-body { padding: 0.5rem 0.9rem 0.85rem; }
+details.fold .fold-body > :first-child { margin-top: 0; }
+details.fold .fold-body > :last-child { margin-bottom: 0; }
+
+/* ------------------------------------------------------------------
+   hour tracker: editable worksheet with print-to-PDF, used by the
+   student assistant guides.
+   ------------------------------------------------------------------ */
+.tracker {
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  background: var(--paper);
+  padding: 1rem 1.1rem 1.2rem;
+  margin: 1rem 0;
+}
+.tracker-head {
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 700;
+  color: var(--accent); margin-bottom: 0.8rem;
+}
+.tk-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.6rem 1rem;
+  margin-bottom: 1rem;
+}
+.tk-field label {
+  display: block; font-family: var(--mono); font-size: 0.7rem;
+  color: var(--ink-soft); margin-bottom: 0.1rem;
+}
+.tk-field input {
+  width: 100%; font-family: var(--mono); font-size: 0.85rem; color: var(--ink);
+  background: var(--paper); border: 0; border-bottom: 1px solid var(--rule);
+  padding: 0.25rem 0.1rem;
+}
+.tk-field input:focus { outline: none; border-bottom-color: var(--accent); }
+table.tk-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.82rem; }
+.tk-table th {
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 700; text-align: left;
+  color: var(--ink-soft); padding: 0.3rem 0.4rem; border-bottom: 1.5px solid var(--accent);
+}
+.tk-table td { padding: 0.1rem 0.4rem; border-bottom: 1px solid var(--rule); }
+.tk-table td.tk-wk { color: var(--ink-soft); width: 4.5rem; }
+.tk-table th.tk-num, .tk-table td.tk-num, .tk-table th.tk-bal, .tk-table td.tk-bal { text-align: right; }
+.tk-table input {
+  width: 100%; font-family: var(--mono); font-size: 0.82rem; color: var(--ink);
+  border: 0; background: transparent; padding: 0.22rem 0;
+}
+.tk-table input.tk-num { text-align: right; }
+.tk-table input:focus { outline: none; background: var(--accent-tint); }
+.tk-bal { color: var(--ink-soft); }
+.tk-bal.low { color: var(--accent); font-weight: 700; }
+.tk-table tr.tk-total td {
+  border-bottom: none; border-top: 1.5px solid var(--accent);
+  font-weight: 700; padding-top: 0.45rem;
+}
+.tk-actions { display: flex; gap: 0.6rem; margin-top: 1rem; flex-wrap: wrap; }
+.tk-btn {
+  font-family: var(--mono); font-size: 0.78rem; color: var(--accent);
+  background: var(--paper); border: 1px solid var(--accent);
+  padding: 0.35rem 0.85rem; cursor: pointer;
+}
+.tk-btn:hover { background: var(--accent-tint); }
+.tk-summary { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-soft); margin-top: 0.7rem; }
+
+/* print sheet: only the generated worksheet reaches the page */
+#print-root { display: none; }
+@media print {
+  body.tracker-print { display: block; background: #fff; }
+  body.tracker-print > *:not(#print-root) { display: none !important; }
+  body.tracker-print #print-root { display: block; padding: 0; }
+  #print-root h1 { font-family: var(--mono); font-size: 15px; font-weight: 700; margin-bottom: 0.2rem; }
+  #print-root .pr-sub { font-family: var(--mono); font-size: 10px; color: var(--ink-soft); margin-bottom: 0.9rem; }
+  #print-root .pr-fields { font-family: var(--mono); font-size: 11px; margin-bottom: 0.9rem; line-height: 1.9; }
+  #print-root .pr-fields span { display: inline-block; margin-right: 1.6rem; }
+  #print-root table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 11px; }
+  #print-root th {
+    text-align: left; font-weight: 700; color: #000; padding: 3px 5px;
+    border-bottom: 1.5px solid var(--accent);
+  }
+  #print-root td { padding: 3px 5px; border-bottom: 1px solid var(--rule); }
+  #print-root .pr-num, #print-root th.pr-num { text-align: right; }
+  #print-root tr.pr-total td { border-top: 1.5px solid var(--accent); border-bottom: none; font-weight: 700; }
+  #print-root .pr-foot { font-family: var(--mono); font-size: 9px; color: var(--ink-soft); margin-top: 1rem; }
+}
+
+/* signature block on a welcome letter */
+.letter-sign { margin-top: 1.6rem; }
+.letter-sign p { margin: 0; }
+.letter-sign p + p { margin-top: 0.9rem; }
+.letter-sign strong { font-family: var(--mono); font-weight: 700; }
